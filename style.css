@@ -1,0 +1,9 @@
+.my-content-editor {
+    position: absolute;
+    border: 2px solid black;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: 700;
+    top: 140px;
+    left: 250px;
+}
