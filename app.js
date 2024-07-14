@@ -2,6 +2,8 @@ import checkOverlap from "./helper/checkOverlap.js";
 import { mockData, SELECTOPTIONS, dataField } from "./data.js";
 import { calculateWordInLine } from "./helper/commonHelper.js";
 import { printPDF } from "./helper/pdfPrintHelper.js";
+import { PLACE_HOLDER_SELECTOR } from "./const.js";
+import { highlightPlaceHolderArea } from "./helper/uxHelper.js";
 const button = document.querySelector(".create");
 const allSpan = document.querySelectorAll("p");
 const print = document.querySelector(".print");
@@ -20,7 +22,7 @@ const createNewPlaceHolder = () => {
         (field) => `<option value="${field.slug}">${field.label}</option>`
     )}</select>
     `;
-    placeHolder.classList.add("my-content-editor");
+    placeHolder.classList.add(PLACE_HOLDER_SELECTOR);
     placeHolder.appendChild(deleteButton);
     placeHolder.setAttribute("draggable", "true");
     document.querySelector("body").appendChild(placeHolder);
@@ -50,7 +52,7 @@ function setContent(element, content) {
 }
 
 print.addEventListener("click", () => {
-    const allEditor = document.querySelectorAll(".my-content-editor");
+    const allEditor = document.querySelectorAll(`.${PLACE_HOLDER_SELECTOR}`);
     allEditor.forEach((placeHolder) => {
         const overLappingSpan = [...allSpan].filter((span) =>
             checkOverlap(placeHolder, span)
@@ -96,3 +98,5 @@ print.addEventListener("click", () => {
         }
     });
 });
+
+document.addEventListener("mousemove", highlightPlaceHolderArea);
